@@ -13,7 +13,9 @@
     />
   </head>
 
-  <body class="d-flex flex-column vh-100">
+  <!-- removed vh-100 as it makes sticky navbar disappear https://stackoverflow.com/questions/54135081/bootstrap-sticky-top-navbar-disappearing-on-scroll-->
+  <!-- <body class="d-flex flex-column vh-100"> -->
+  <body class="d-flex flex-column">
     <%- include('../partials/navbar')%>
     <main class="container mt-5"><%- body %></main>
     <%- include('../partials/footer')%>
