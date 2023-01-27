@@ -98,7 +98,7 @@ app.delete(
   })
 );
 
-// catch all that don't match any above
+// catch all for requests that do not match any above
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
