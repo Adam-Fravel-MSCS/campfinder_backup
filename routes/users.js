@@ -39,7 +39,7 @@ router.post(
     keepSessionInfo: true,
   }),
   (req, res) => {
-    req.flash("success", "welcome back!");
+    req.flash("success", "Welcome back!");
     const redirectUrl = req.session.returnTo || "/campgrounds";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
