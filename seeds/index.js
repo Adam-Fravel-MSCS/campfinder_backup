@@ -3,6 +3,7 @@ const cities = require("./cities");
 const { places, descriptors } = require("./seedHelpers");
 const Campground = require("../models/campground");
 
+mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/campfinder", {});
 
 const db = mongoose.connection;
