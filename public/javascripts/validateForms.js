@@ -2,6 +2,7 @@
 (function () {
   "use strict";
 
+  // https://www.npmjs.com/package/bs-custom-file-input
   bsCustomFileInput.init();
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
