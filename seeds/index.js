@@ -23,8 +23,8 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await Campground.deleteMany({}); // delete everything
-  // seed 50 new campgrounds
-  for (let i = 0; i < 50; i++) {
+  // seed 300 new campgrounds
+  for (let i = 0; i < 300; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     // custom
     const name = `${sample(descriptors)} ${sample(places)}`;
