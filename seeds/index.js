@@ -46,7 +46,6 @@ const seedDB = async () => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!",
       price,
-      // geometry: geoData.body.features[0].geometry,
       geometry: {
         type: "Point",
         coordinates: [
@@ -54,10 +53,6 @@ const seedDB = async () => {
           cities[random1000].latitude,
         ],
       },
-      // geometry: {
-      //   type: "Point",
-      //   coordinates: [-113.1331, 47.0202],
-      // },
       images: [
         {
           // url: "https://res.cloudinary.com/doh0oy2mj/image/upload/v1675871052/CampFinder/osdujnkip28nnkd5shdb.jpg",
