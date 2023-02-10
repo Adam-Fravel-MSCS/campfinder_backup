@@ -21,8 +21,8 @@ const reviewRoutes = require("./routes/reviews");
 
 const MongoStore = require("connect-mongo");
 
-// const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/campfinder";
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/campfinder";
+// const dbUrl = process.env.DB_URL;
 
 mongoose.set("strictQuery", false);
 mongoose.connect(dbUrl, {});
@@ -48,12 +48,13 @@ app.use(
   })
 );
 
+const secret = process.env.SECRET || "thisshouldbeabettersecret!";
+
 const store = MongoStore.create({
   mongoUrl: dbUrl,
+  secret: secret,
   touchAfter: 24 * 60 * 60,
-  crypto: {
-    secret: "squirrel",
-  },
+  // crypto: {secret: "squirrel",},
 });
 
 store.on("error", function (e) {
@@ -63,7 +64,8 @@ store.on("error", function (e) {
 const sessionConfig = {
   store,
   name: "session",
-  secret: "thisshouldbeabettersecret!",
+  // secret: "thisshouldbeabettersecret!",
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
