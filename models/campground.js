@@ -1,18 +1,21 @@
 const mongoose = require("mongoose");
-const Review = require("./review");
 const Schema = mongoose.Schema;
+const Review = require("./review");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
+// Image schema
 const ImageSchema = new Schema({
   url: String,
   filename: String,
 });
 
+// Image schema virtual
 ImageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_200");
 });
 
-const opts = { toJSON: { virtuals: true } };
-
+// Campground schema
+const campgroundOptions = { toJSON: { virtuals: true } };
 const CampgroundSchema = new Schema(
   {
     title: String,
@@ -42,15 +45,16 @@ const CampgroundSchema = new Schema(
       },
     ],
   },
-  opts
+  campgroundOptions
 );
 
+// Campground schema virtual
 CampgroundSchema.virtual("properties.popUpMarkup").get(function () {
-  return `
-  <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
-  <p>${this.description.substring(0, 20)}...</p>`;
+  return `<strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+	<p>${this.description.substring(0, 20)}...</p>`;
 });
 
+// Mongoose delete review middleware
 CampgroundSchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
     await Review.deleteMany({
@@ -60,5 +64,7 @@ CampgroundSchema.post("findOneAndDelete", async function (doc) {
     });
   }
 });
+
+CampgroundSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("Campground", CampgroundSchema);
