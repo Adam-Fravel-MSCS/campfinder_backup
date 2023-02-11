@@ -70,12 +70,13 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
-
+app.use(helmet());
 const scriptSrcUrls = [
   "https://api.tiles.mapbox.com/",
   "https://api.mapbox.com/",
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
+  "https://kit.fontawesome.com",
 ];
 const styleSrcUrls = [
   "https://api.mapbox.com/",
@@ -89,27 +90,27 @@ const connectSrcUrls = [
   "https://events.mapbox.com/",
 ];
 const fontSrcUrls = [];
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: [],
-//       connectSrc: ["'self'", ...connectSrcUrls],
-//       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-//       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-//       workerSrc: ["'self'", "blob:"],
-//       objectSrc: [],
-//       imgSrc: [
-//         "'self'",
-//         "blob:",
-//         "data:",
-//         "https://res.cloudinary.com/",
-//         "https://images.unsplash.com/",
-//         "https://source.unsplash.com/",
-//       ],
-//       fontSrc: ["'self'", ...fontSrcUrls],
-//     },
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/",
+        "https://images.unsplash.com/",
+        "https://source.unsplash.com/",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+  })
+);
 
 // Make sure passport is used after session
 app.use(passport.initialize());
